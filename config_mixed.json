@@ -96,7 +96,6 @@
         "auto_detect_interface": true,
         "final": "🐟 漏网之鱼",
     "rules": [
-      { "type": "logical", "mode": "or", "rules": [{ "port": 53 }, { "protocol": "dns" }], "outbound": "dns-out" },
       { "port": 443 }, { "protocol": "quic" }], "outbound": "block" },
       { "rule_set": "geosite-ad", "outbound": "block" },
       { "clash_mode": "direct", "outbound": "🎯 全球直连" },
