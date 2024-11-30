@@ -1,0 +1,228 @@
+# 机场订阅，名称不能重复
+proxy-providers:
+  Airport_01:
+    type: http
+    interval: 1800
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: DIRECT
+    url: "https://www5.1st-subscription-from-chickenfarmer.top/api/v1/client/subscribe?token=19a275882b8ee2ba45ba598553e7ecbb"
+  Airport_02:
+    type: http
+    interval: 1800
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: DIRECT
+    url: "https://djjc.cfd/api/v1/client/subscribe?token=45e82b34df01c8c9239a72f353a49924"
+  Airport_03:
+    type: http
+    interval: 1800
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: DIRECT
+    url: "https://sub.qingfengyun.icu/api/v1/client/subscribe?token=dcccbc0c20e590d79070c2631d8c9e05"
+  Airport_04:
+    type: http
+    interval: 1800
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: DIRECT
+    url: "https://cloudfisher.net/jsk34?token=12ba81b17fca34bffc8ab1c37fab0ee2"
+  Airport_05:
+    type: http
+    interval: 1800
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: DIRECT
+    url: "https://fn2.233235.xyz/api/v1/client/subscribe?token=125cc80046c8a47a72bcf02ff9801f98"
+
+
+
+
+      
+# 用于下载订阅时指定UA
+global-ua: clash-verge/v1.6.6
+    
+# 全局配置
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+ipv6: false
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+  
+geodata-mode: false
+geodata-loader: standard
+geo-auto-update: true
+geo-update-interval: 48
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+  
+# 控制面板
+external-controller: 0.0.0.0:9090
+secret: ""
+external-ui: ui
+external-ui-url: "https://ghp.ci/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+# 匹配进程 always/strict/off
+find-process-mode: strict
+global-client-fingerprint: chrome
+keep-alive-idle: 600
+keep-alive-interval: 30
+
+# 策略组选择和fakeip缓存
+profile:
+  store-selected: true
+  store-fake-ip: true
+  
+# 流量嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - +.v2ex.com
+  skip-domain:
+    - "Mijia Cloud"
+    - "dlg.io.mi.com"
+    - "+.push.apple.com"
+    - "+.apple.com"
+    
+# 代理模式
+tun:
+  enable: true
+  stack: mixed
+  mtu: 9000
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  
+# DNS模块
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  respect-rules: true
+  # 模式切换 redir-host / fake-ip
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  # 模式切换 whitelist/blacklist 
+  # 黑名单模式表示如果匹配成功则不返回 Fake-IP, 白名单模式时只有匹配成功才返回 Fake-IP
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - "+.lan"
+    - "+.local"
+    - geosite:private
+    - geosite:cn
+  default-nameserver:
+    - 223.5.5.5
+  proxy-server-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - tls://dns.alidns.com
+    - quic://dns.alidns.com
+
+
+
+
+   
+
+# 锚点
+pr: &pr {type: select, proxies: [香港节点, 日本节点, 台湾节点, 美国节点, 新加坡节点, 其它节点, 省流节点, DIRECT]}
+# 策略组
+proxy-groups:
+  - {name: Porn,!!merge <<: *pr}
+  - {name: Steam,!!merge <<: *pr}
+  - {name: 国外媒体,!!merge <<: *pr}
+  - {name: Youtube,!!merge <<: *pr}
+  - {name: Tiktok,!!merge <<: *pr}
+  - {name: Github,!!merge <<: *pr}
+  - {name: Google,!!merge <<: *pr}
+  - {name: Microsoft,!!merge <<: *pr}
+  - {name: 国外社交,!!merge <<: *pr}
+  - {name: 国外,!!merge <<: *pr}
+  - {name: 国内,type: select, proxies: [DIRECT]}
+  - {name: 省流节点, type: select, include-all: true, tolerance: 20, interval: 300, filter: "(?i)0.1|0.5|0.3^((?!(原生IP|套餐|高)).)*$"}
+  - {name: 台湾节点, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?i)台湾|tw|Taiwan|cn|台"}
+  - {name: 新加坡节点, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?i)新加坡|sg|Singapore|SG|狮城"}
+  - {name: 香港节点, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?i)港|HK|hk|Hong"}
+  - {name: 日本节点, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?i)日|东京|JP|jp|Japan" }
+  - {name: 美国节点, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?i)美|洛杉矶|us|UnitedStates|US|States|America"}
+  - {name: 其它节点, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^(?i)柬埔|斯坦|尼泊|韩|首尔|也纳|克兰|比利时|尔兰|立陶宛|冰岛|秘鲁|耳其|利亚|埃及|希腊|斯洛伐克|孟加|芬兰|阿联|英国|德国|南非|意大|法国|加拿|墨西|印度|越南|罗斯|瑞士|瑞典|智利|荷兰|比亚|巴西|沙特|班牙|泰国"}
+rules:
+  - RULE-SET,steamcn,国内
+  - RULE-SET,steam,Steam
+  - RULE-SET,Rockstar,Steam
+  - RULE-SET,Ubisoft,Steam
+  - RULE-SET,Origin,Steam
+  - RULE-SET,emby,国外媒体
+  - RULE-SET,netflix,国外媒体
+  - RULE-SET,Disney,国外媒体
+  - RULE-SET,HBO,国外媒体
+  - RULE-SET,github,Github
+  - RULE-SET,Google,Google
+  - RULE-SET,Youtube,Youtube
+  - RULE-SET,Tiktok,Tiktok
+  - RULE-SET,porn,Porn
+  - RULE-SET,microsoft,Microsoft
+  - RULE-SET,Instagram,国外社交
+  - RULE-SET,telegram,国外社交
+  - RULE-SET,Twitter,国外社交
+  - RULE-SET,Facebook,国外社交
+  - RULE-SET,wd,国外
+  - RULE-SET,gfw,国外
+  - MATCH,国内
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  qcy: &qcy {type: http, interval: 86400, behavior: domain, format: text}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+rule-providers: 
+  emby: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/master/template/emby.list"}
+  Disney: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Disney/Disney.list"}
+  HBO: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/HBO/HBO.list"}
+  Instagram: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Instagram/Instagram.list"}
+  Twitter: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Twitter/Twitter.list"}
+  Facebook: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Facebook/Facebook.list"}
+  steamcn: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
+  steam: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Steam/Steam.list"}
+  Rockstar: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Rockstar/Rockstar.list"}
+  Origin: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Origin/Origin.list"}
+  Ubisoft: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Ubisoft/Ubisoft.list"}
+  porn: {!!merge <<: *domain, url: "https://ghp.ci/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-porn.mrs"}
+  github: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list"}
+  Google: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list"}
+  Youtube: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list"}
+  Tiktok: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TikTok/TikTok.list"}
+  telegram: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list"}
+  netflix: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Netflix/Netflix.list"}
+  microsoft: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list"}
+  gfw: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/liandu2024/clash/refs/heads/main/Proxy.list"}
+  geolocation-!cn: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"}
+  wd: {!!merge <<: *class, url: "https://ghp.ci/https://raw.githubusercontent.com/libaoxin123/libaoxin/refs/heads/master/ProxyLite.list"}
