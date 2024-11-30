@@ -8,43 +8,8 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: DIRECT
-    url: "https://www5.1st-subscription-from-chickenfarmer.top/api/v1/client/subscribe?token=19a275882b8ee2ba45ba598553e7ecbb"
-  Airport_02:
-    type: http
-    interval: 1800
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-    proxy: DIRECT
-    url: "https://djjc.cfd/api/v1/client/subscribe?token=45e82b34df01c8c9239a72f353a49924"
-  Airport_03:
-    type: http
-    interval: 1800
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-    proxy: DIRECT
-    url: "https://sub.qingfengyun.icu/api/v1/client/subscribe?token=dcccbc0c20e590d79070c2631d8c9e05"
-  Airport_04:
-    type: http
-    interval: 1800
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-    proxy: DIRECT
-    url: "https://cloudfisher.net/jsk34?token=12ba81b17fca34bffc8ab1c37fab0ee2"
-  Airport_05:
-    type: http
-    interval: 1800
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-    proxy: DIRECT
-    url: "https://fn2.233235.xyz/api/v1/client/subscribe?token=125cc80046c8a47a72bcf02ff9801f98"
+    url: ""
+
 
 
 
