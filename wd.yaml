@@ -178,5 +178,4 @@ rules:
   - "RULE-SET,Proxylite,节点选择"
   - "RULE-SET,Chinamax,全球直连"
   - "RULE-SET,wd,全球直连"
-  - "GEOIP,CN,全球直连"
   - "MATCH,漏网之鱼"
