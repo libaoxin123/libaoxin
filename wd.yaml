@@ -19,19 +19,19 @@ proxy-groups:
     include-all: true
     interval: 300
     tolerance: 50
-   - name: Emby
+  - name: Emby
     type: select
     proxies:
       - 低倍率节点
       - DIRECT
       - 手动切换
-   - name: 全球直连
+  - name: 全球直连
     type: select
     proxies:
       - DIRECT
       - 节点选择
       - 自动选择
-   - name: 漏网之鱼
+  - name: 漏网之鱼
     type: select
     proxies:
       - 节点选择
@@ -96,77 +96,75 @@ rule-providers:
     format: text
     type: http
   Steamcn:
-    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/SteamCN/SteamCN.list
+    url: https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Clash/SteamCN/SteamCN.list
     path: ./ruleset/Steamcn.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
   Steam:
-    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Steam/Steam.list
+    url: https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Clash/Steam/Steam.list
     path: ./ruleset/Steam.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
   Telegram:
-    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Telegram/Telegram.list
+    url: https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Clash/Telegram/Telegram.list
     path: ./ruleset/Telegram.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
   Emby:
-    url: https://github.com/libaoxin123/libaoxin/blob/master/emby.list
+    url: https://github.com/libaoxin123/libaoxin/raw/refs/heads/master/emby.list
     path: ./ruleset/Emby.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
   YouTube:
-    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/YouTube/YouTube.list
+    url: https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Clash/YouTube/YouTube.list
     path: ./ruleset/YouTube.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
- GitHub:
-    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.list
+  GitHub:
+    url: https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Clash/GitHub/GitHub.list
     path: ./ruleset/GitHub.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
- Google:
-    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Google/Google.list
+  Google:
+    url: https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Clash/Google/Google.list
     path: ./ruleset/Google.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
- Porn:
+  Porn:
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-porn.mrs
     path: ./ruleset/Porn.mrs
     behavior: domain
     interval: 86400
     format: mrs
     type: http
- Proxylite:
-    url: https://github.com/libaoxin123/libaoxin/blob/master/ProxyLite.list
+  Proxylite:
+    url: https://github.com/libaoxin123/libaoxin/raw/refs/heads/master/ProxyLite.list
     path: ./ruleset/ProxyLite.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
- wd:
-    url: https://github.com/libaoxin123/libaoxin/blob/master/wd.list
+  wd:
+    url: https://github.com/libaoxin123/libaoxin/raw/refs/heads/master/wd.list
     path: ./ruleset/wd.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
-
-
 
 rules:
   - "RULE-SET,Steamcn,全球直连"
