@@ -1,0 +1,184 @@
+proxy-groups:
+  - name: 节点选择
+    type: select
+    proxies:
+      - 自动选择
+      - 台湾节点
+      - 狮城节点
+      - 日本节点
+      - 美国节点
+      - 韩国节点
+      - 香港节点
+      - 手动切换
+      - DIRECT
+  - name: 手动切换
+    include-all: true
+    type: select
+  - name: 自动选择
+    type: url-test
+    include-all: true
+    interval: 300
+    tolerance: 50
+   - name: Emby
+    type: select
+    proxies:
+      - 低倍率节点
+      - DIRECT
+      - 手动切换
+   - name: 全球直连
+    type: select
+    proxies:
+      - DIRECT
+      - 节点选择
+      - 自动选择
+   - name: 漏网之鱼
+    type: select
+    proxies:
+      - 节点选择
+      - 自动选择
+      - DIRECT
+      - 香港节点
+      - 台湾节点
+      - 狮城节点
+      - 日本节点
+      - 美国节点
+      - 韩国节点
+      - 手动切换
+  - name: 香港节点
+    include-all: true
+    filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 日本节点
+    include-all: true
+    filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 美国节点
+    include-all: true
+    filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 台湾节点
+    include-all: true
+    filter: (?i)台|新北|彰化|TW|Taiwan
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 狮城节点
+    include-all: true
+    filter: (?i)新加坡|坡|狮城|SG|Singapore
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 韩国节点
+    include-all: true
+    filter: (?i)KR|Korea|KOR|首尔|韩|韓
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 低倍率节点
+    include-all: true
+    filter: (?i)0.1|0.5|0.2|0.3
+    type: url-test
+    interval: 300
+    tolerance: 50
+
+rule-providers:
+  Chinamax:
+    url: https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Clash/ChinaMax/ChinaMax.list
+    path: ./ruleset/Chinamax.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+  Steamcn:
+    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/SteamCN/SteamCN.list
+    path: ./ruleset/Steamcn.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+  Steam:
+    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Steam/Steam.list
+    path: ./ruleset/Steam.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+  Telegram:
+    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Telegram/Telegram.list
+    path: ./ruleset/Telegram.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+  Emby:
+    url: https://github.com/libaoxin123/libaoxin/blob/master/emby.list
+    path: ./ruleset/Emby.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+  YouTube:
+    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/YouTube/YouTube.list
+    path: ./ruleset/YouTube.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+ GitHub:
+    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.list
+    path: ./ruleset/GitHub.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+ Google:
+    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Google/Google.list
+    path: ./ruleset/Google.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+ Porn:
+    url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-porn.mrs
+    path: ./ruleset/Porn.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+ Proxylite:
+    url: https://github.com/libaoxin123/libaoxin/blob/master/ProxyLite.list
+    path: ./ruleset/ProxyLite.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+ wd:
+    url: https://github.com/libaoxin123/libaoxin/blob/master/wd.list
+    path: ./ruleset/wd.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+
+
+
+rules:
+  - "RULE-SET,Steamcn,全球直连"
+  - "RULE-SET,Emby,Emby"
+  - "RULE-SET,Steam,节点选择"
+  - "RULE-SET,YouTube,节点选择"
+  - "RULE-SET,GitHub,节点选择"
+  - "RULE-SET,Telegram,节点选择"
+  - "RULE-SET,Porn,节点选择"
+  - "RULE-SET,Google,节点选择"
+  - "RULE-SET,Proxylite,节点选择"
+  - "RULE-SET,Chinamax,全球直连"
+  - "RULE-SET,wd,全球直连"
+  - "GEOIP,CN,全球直连"
+  - "MATCH,漏网之鱼"
