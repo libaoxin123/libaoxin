@@ -3,7 +3,6 @@ proxy-groups:
   - name: 节点选择
     type: select
     proxies:
-      - 自动选择
       - 香港节点
       - 台湾节点
       - 新加坡节点  # 原"狮城节点"，统一为通用命名
@@ -19,14 +18,6 @@ proxy-groups:
     include-all: true
     proxies: []  # 自动包含所有节点，清空显式列表更简洁
 
-  # 自动测速组（优化参数，提升测速准确性）
-  - name: 自动选择
-    type: url-test
-    include-all: true
-    url: http://www.gstatic.com/generate_204  # 补充标准测速URL
-    interval: 300
-    tolerance: 50
-    timeout: 5000  # 新增超时配置，避免测速卡死
 
   # 媒体专用组（Emby）
   - name: Emby
@@ -41,14 +32,14 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
-      - 自动选择  # 优先自动选择，替代原"节点选择"，减少嵌套
+      - 节点选择 
       - 手动切换
 
   # 兜底组（精简冗余节点，避免重复）
   - name: 漏网之鱼
     type: select
     proxies:
-      - 自动选择
+      - 节点选择
       - DIRECT
       - 手动切换
 
