@@ -154,7 +154,16 @@ rule-providers:
     format: text
     interval: 86400
     cache: true
-
+    
+  Tmdb:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Tmdb/Tmdb.yaml
+    path: ./ruleset/Tmdb.list
+    format: yaml
+    interval: 86400
+    cache: true
+    
   YouTube:
     type: http
     behavior: classical
@@ -213,6 +222,7 @@ rule-providers:
 rules:
   # 1. 媒体类（高优先级）
   - RULE-SET,Emby,Emby
+  - RULE-SET,Tmdb,节点选择
   - RULE-SET,YouTube,节点选择
   # 2. 社交/工具类
   - RULE-SET,Telegram,节点选择
