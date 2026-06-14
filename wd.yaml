@@ -16,7 +16,6 @@ proxy-groups:
   # 手动切换（自动包含全部节点，无需显式列表）
   - name: 手动切换
     type: select
-    include-all: true
     proxies: 
       - 香港节点
       - 台湾节点
