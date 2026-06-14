@@ -17,8 +17,15 @@ proxy-groups:
   - name: 手动切换
     type: select
     include-all: true
-    proxies: []
-
+    proxies: 
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 韩国节点
+      - 手动切换
+      - DIRECT
   # 媒体专用组（Emby）
   - name: Emby
     type: select
