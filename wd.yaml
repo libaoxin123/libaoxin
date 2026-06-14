@@ -182,15 +182,7 @@ rule-providers:
     format: text
     interval: 86400
     cache: true
-
-  Porn:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/master/geo/geosite/category-porn.mrs
-    path: ./ruleset/Porn.mrs
-    format: mrs
-    interval: 86400
-    cache: true
+  
 
   ProxyLite:
     type: http
@@ -227,7 +219,6 @@ rules:
   - RULE-SET,Steam,节点选择
 
   # 【4】其他代理类规则
-  - RULE-SET,Porn,节点选择
   - RULE-SET,ProxyLite,节点选择
 
   # 【5】国内直连（含自定义规则）
