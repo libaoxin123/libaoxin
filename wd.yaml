@@ -1,23 +1,23 @@
+# === 代理组定义 ===
 proxy-groups:
-  # 核心节点选择组（简化命名，提升可读性）
+  # 核心节点选择组（命名简洁、无空格）
   - name: 节点选择
     type: select
     proxies:
       - 香港节点
       - 台湾节点
-      - 新加坡节点  # 原"狮城节点"，统一为通用命名
+      - 新加坡节点
       - 日本节点
       - 美国节点
       - 韩国节点
       - 手动切换
       - DIRECT
 
-  # 手动兜底组（仅保留核心，避免冗余）
+  # 手动切换（自动包含全部节点，无需显式列表）
   - name: 手动切换
     type: select
     include-all: true
-    proxies: []  # 自动包含所有节点，清空显式列表更简洁
-
+    proxies: []
 
   # 媒体专用组（Emby）
   - name: Emby
@@ -27,28 +27,30 @@ proxy-groups:
       - DIRECT
       - 手动切换
 
-  # 直连优先组（简化逻辑，优先直连，兜底节点）
+  # 直连优先组（优先直连，失败后 fallback 到节点选择）
   - name: 全球直连
     type: select
     proxies:
       - DIRECT
-      - 节点选择 
-      - 手动切换
-
-  # 兜底组（精简冗余节点，避免重复）
-  - name: 漏网之鱼
-    type: select
-    proxies:
       - 节点选择
-      - DIRECT
       - 手动切换
 
-  # 区域节点组（统一命名+优化过滤规则，提升匹配准确性）
+  # 特殊用途：低倍率节点（匹配 0.1 ~ 0.5x 带宽节点）
+  - name: 低倍率节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)0\.[1-5]\d*  # 匹配 0.1, 0.15, 0.5, 0.50 等（更严谨）
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+  # 区域节点组（统一命名 + 正则优化）
   - name: 香港节点
     type: url-test
     include-all: true
     url: http://www.gstatic.com/generate_204
-    filter: (?i)港|HK|Hong\s?Kong  # 优化正则，匹配"Hong Kong"/"HongKong"
+    filter: (?i)港|HK|Hong\s*Kong|HongKong
     interval: 300
     tolerance: 50
     timeout: 5000
@@ -84,7 +86,7 @@ proxy-groups:
     type: url-test
     include-all: true
     url: http://www.gstatic.com/generate_204
-    filter: (?i)美|US|United\s?States|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥
+    filter: (?i)美|US|United\s*States|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥
     interval: 300
     tolerance: 50
     timeout: 5000
@@ -98,17 +100,7 @@ proxy-groups:
     tolerance: 50
     timeout: 5000
 
-  # 特殊用途组（低倍率节点）
-  - name: 低倍率节点
-    type: url-test
-    include-all: true
-    url: http://www.gstatic.com/generate_204
-    filter: (?i)0\.[1-5]  # 简化正则，匹配0.1-0.5所有低倍率
-    interval: 300
-    tolerance: 50
-    timeout: 5000
-
-# 规则提供商（优化URL稳定性+路径规范+新增缓存）
+# === 规则提供商（修复 format + 增加备用源）===
 rule-providers:
   Chinamax:
     type: http
@@ -117,7 +109,7 @@ rule-providers:
     path: ./ruleset/Chinamax.list
     format: text
     interval: 86400
-    cache: true  # 新增缓存，减少重复下载
+    cache: true
 
   SteamCN:
     type: http
@@ -140,9 +132,9 @@ rule-providers:
   Telegram:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list
     path: ./ruleset/Telegram.list
-    format: yaml  # 修正格式：原URL是yaml文件，匹配实际格式
+    format: text  # ⚠️ 原为 yaml，实际为 text；已修正
     interval: 86400
     cache: true
 
@@ -154,7 +146,7 @@ rule-providers:
     format: text
     interval: 86400
     cache: true
-    
+
   Tmdb:
     type: http
     behavior: domain
@@ -163,7 +155,7 @@ rule-providers:
     format: mrs
     interval: 86400
     cache: true
-    
+
   YouTube:
     type: http
     behavior: classical
@@ -209,7 +201,7 @@ rule-providers:
     interval: 86400
     cache: true
 
-  WD:  # 大写统一命名规范
+  WD:
     type: http
     behavior: classical
     url: https://raw.githubusercontent.com/libaoxin123/libaoxin/master/wd.list
@@ -218,24 +210,29 @@ rule-providers:
     interval: 86400
     cache: true
 
-# 规则表（优化优先级+精简逻辑）
+# === 规则表（显式分层 + 优化兜底逻辑）===
 rules:
-  # 1. 媒体类（高优先级）
+  # 【1】高优先级：媒体服务（避免直连导致卡顿）
   - RULE-SET,Emby,Emby
   - RULE-SET,Tmdb,节点选择
   - RULE-SET,YouTube,节点选择
-  # 2. 社交/工具类
+
+  # 【2】社交/开发工具（需稳定低延迟）
   - RULE-SET,Telegram,节点选择
   - RULE-SET,GitHub,节点选择
   - RULE-SET,Google,节点选择
-  # 3. 娱乐类
-  - RULE-SET,SteamCN,全球直连  # 国内Steam优先直连
-  - RULE-SET,Steam,节点选择   # 国际Steam走节点
-  # 4. 特殊用途
+
+  # 【3】游戏平台（国内直连 + 国际代理）
+  - RULE-SET,SteamCN,全球直连
+  - RULE-SET,Steam,节点选择
+
+  # 【4】其他代理类规则
   - RULE-SET,Porn,节点选择
   - RULE-SET,ProxyLite,节点选择
-  # 5. 国内/直连类
+
+  # 【5】国内直连（含自定义规则）
   - RULE-SET,Chinamax,全球直连
   - RULE-SET,WD,全球直连
-  # 6. 兜底规则（最后匹配）
-  - MATCH,漏网之鱼
+
+  # 【6】兜底规则（最后匹配）——不再引用“节点选择”，避免循环策略
+  - MATCH,手动切换
