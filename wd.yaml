@@ -16,7 +16,7 @@ proxy-groups:
   # 手动切换（自动包含全部节点，无需显式列表）
   - name: 手动切换
     type: select
-    proxies: 
+    proxies:
       - 香港节点
       - 台湾节点
       - 新加坡节点
@@ -25,6 +25,7 @@ proxy-groups:
       - 韩国节点
       - 手动切换
       - DIRECT
+      
   # 媒体专用组（Emby）
   - name: Emby
     type: select
