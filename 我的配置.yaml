@@ -1,0 +1,235 @@
+# === 代理组定义 ===
+proxy-groups:
+  # 核心节点选择组（命名简洁、无空格）
+  - name: 节点选择
+    type: select
+    proxies:
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 韩国节点
+      - 手动切换
+      - DIRECT
+
+  - name: 漏网之鱼
+    type: select
+    proxies:
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 韩国节点
+      - 手动切换
+      - DIRECT
+      
+  # 媒体专用组（Emby）
+  - name: Emby
+    type: select
+    proxies:
+      - 低倍率节点
+      - DIRECT
+      - 手动切换
+
+  # 直连优先组（优先直连，失败后 fallback 到节点选择）
+  - name: 全球直连
+    type: select
+    proxies:
+      - DIRECT
+      - 节点选择
+      - 手动切换
+
+  # 特殊用途：低倍率节点（匹配 0.1 ~ 0.5x 带宽节点）
+  - name: 低倍率节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)0\.[1-5]\d*  # 匹配 0.1, 0.15, 0.5, 0.50 等（更严谨）
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+  # 区域节点组（统一命名 + 正则优化）
+  - name: 香港节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)港|HK|Hong\s*Kong|HongKong
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+  - name: 台湾节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)台|TW|Taiwan|新北|彰化
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+  - name: 新加坡节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)新加坡|坡|狮城|SG|Singapore
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+  - name: 日本节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)日本|JP|Japan|东京|大阪|川日|泉日|埼玉|沪日|深日
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+  - name: 美国节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)美|US|United\s*States|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+  - name: 韩国节点
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    filter: (?i)韩|KR|Korea|KOR|首尔
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+
+# === 规则提供商（修复 format + 增加备用源）===
+rule-providers:
+  Chinamax:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaMax/ChinaMax.list
+    path: ./ruleset/Chinamax.list
+    format: text
+    interval: 86400
+    cache: true
+
+  SteamCN:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.list
+    path: ./ruleset/SteamCN.list
+    format: text
+    interval: 86400
+    cache: true
+
+  Steam:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.list
+    path: ./ruleset/Steam.list
+    format: text
+    interval: 86400
+    cache: true
+
+  Telegram:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list
+    path: ./ruleset/Telegram.list
+    format: text  # ⚠️ 原为 yaml，实际为 text；已修正
+    interval: 86400
+    cache: true
+
+  Emby:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/libaoxin123/libaoxin/master/emby.list
+    path: ./ruleset/Emby.list
+    format: text
+    interval: 86400
+    cache: true
+
+  Tmdb:
+    type: http
+    behavior: domain
+    url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tmdb.mrs
+    path: ./ruleset/Tmdb.mrs
+    format: mrs
+    interval: 86400
+    cache: true
+
+  YouTube:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list
+    path: ./ruleset/YouTube.list
+    format: text
+    interval: 86400
+    cache: true
+
+  GitHub:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.list
+    path: ./ruleset/GitHub.list
+    format: text
+    interval: 86400
+    cache: true
+
+  Google:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.list
+    path: ./ruleset/Google.list
+    format: text
+    interval: 86400
+    cache: true
+  
+
+  ProxyLite:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/libaoxin123/libaoxin/master/ProxyLite.list
+    path: ./ruleset/ProxyLite.list
+    format: text
+    interval: 86400
+    cache: true
+
+  WD:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/libaoxin123/libaoxin/master/wd.list
+    path: ./ruleset/WD.list
+    format: text
+    interval: 86400
+    cache: true
+
+# === 规则表（显式分层 + 优化兜底逻辑）===
+rules:
+  # 【1】高优先级：媒体服务（避免直连导致卡顿）
+  - RULE-SET,Emby,Emby
+  - RULE-SET,Tmdb,节点选择
+  - RULE-SET,YouTube,节点选择
+
+  # 【2】社交/开发工具（需稳定低延迟）
+  - RULE-SET,Telegram,节点选择
+  - RULE-SET,GitHub,节点选择
+  - RULE-SET,Google,节点选择
+
+  # 【3】游戏平台（国内直连 + 国际代理）
+  - RULE-SET,SteamCN,全球直连
+  - RULE-SET,Steam,节点选择
+
+  # 【4】其他代理类规则
+  - RULE-SET,ProxyLite,节点选择
+
+  # 【5】国内直连（含自定义规则）
+  - RULE-SET,Chinamax,全球直连
+  - RULE-SET,WD,全球直连
+
+  # 【6】兜底规则（最后匹配）——不再引用“节点选择”，避免循环策略
+  - MATCH,漏网之鱼
