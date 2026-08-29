@@ -1,0 +1,23 @@
+{
+  "rules": [
+    {
+      "domain_suffix": [
+        "cloudflare.epicgamescdn.com",
+        "www.7udh.com",
+        "sfeii.com",
+        "hkbdy.com",
+        "hdmoli.pro",
+        "v.damoli.pro",
+        "sc1080.top",
+        "d1dm.cc"
+      ]
+    },
+    {
+      "domain": [
+        "www.hdmoli.com",
+        "www.btbtl.com"
+      ]
+    }
+  ]
+}
+

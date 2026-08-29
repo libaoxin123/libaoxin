@@ -1,0 +1,44 @@
+{
+  "rules": [
+    {
+      "domain_suffix": [
+        "qichiyu.com",
+        "needay.xyz",
+        "telegram.me",
+        "cloudfisher.net",
+        "顶级机场.com",
+        "shturl.cc/ShS8",
+        "feiniaoyun.xyz",
+        "dl.openwrt.ai",
+        "shop.awatv.de",
+        "shturl.c",
+        "shturl.cc/bCmhBo",
+        "nullbr.online",
+        "api.shturl.cc/aRBP",
+        "mikanani.me",
+        "assets.fanart.tv",
+        "shturl.cc/U",
+        "anibt.net",
+        "animes.garden",
+        "nyaa.si",
+        "acg.rip",
+        "google.com",
+        "tmdb.org",
+        "shturl.cc/aRBP",
+        "anilist.co",
+        "wushuo.top",
+        "bgm.tv",
+        "yinglianwan.top",
+        "shturl.cc/",
+        "fanart.tv"
+      ]
+    },
+    {
+      "domain": [
+        "oceancloud.asia"
+      ]
+    }
+  ]
+}
+
+
