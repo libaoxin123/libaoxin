@@ -102,14 +102,14 @@
         "tag": "geosite-zijancn",
         "type": "remote",
         "format": "source",
-        "url": "https://raw.githubusercontent.com/libaoxin123/libaoxin/refs/heads/master/wd.list",
+        "url": "https://github.com/libaoxin123/libaoxin/edit/master/wd.json",
         "download_detour": "🎯 全球直连"
       },
       {
         "tag": "geosite-zijanproxy",
         "type": "remote",
         "format": "source",
-        "url": "https://raw.githubusercontent.com/libaoxin123/libaoxin/refs/heads/master/ProxyLite.list",
+        "url": "https://raw.githubusercontent.com/libaoxin123/libaoxin/refs/heads/master/ProxyLite.json",
         "download_detour": "🎯 全球直连"
       }
     ],
