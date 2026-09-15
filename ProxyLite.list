@@ -8,7 +8,7 @@ DOMAIN-SUFFIX,dl.openwrt.ai
 DOMAIN-SUFFIX,shop.awatv.de
 DOMAIN-SUFFIX,jmzj.xyz
 DOMAIN-SUFFIX,cdnxxx-proxy.vip
-DOMAIN,oceancloud.asia
+DOMAIN-SUFFIX,oceancloud.asia
 DOMAIN-SUFFIX,nullbr.online
 DOMAIN-SUFFIX,mikanani.me
 DOMAIN-SUFFIX,mikanime.tv
@@ -17,7 +17,7 @@ DOMAIN-SUFFIX,animes.garden
 DOMAIN-SUFFIX,nyaa.si
 DOMAIN-SUFFIX,acg.rip
 DOMAIN-SUFFIX,tmdb.org
-DOMAIN,themoviedb.org
+DOMAIN-SUFFIX,themoviedb.org
 DOMAIN-SUFFIX,anilist.co
 DOMAIN-SUFFIX,wushuo.top
 DOMAIN-SUFFIX,bgm.tv
